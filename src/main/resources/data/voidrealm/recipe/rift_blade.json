@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "R",
+    "I",
+    "S"
+  ],
+  "key": {
+    "R": {
+      "item": "voidrealm:rift_core"
+    },
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "voidrealm:rift_blade",
+    "count": 1
+  }
+}

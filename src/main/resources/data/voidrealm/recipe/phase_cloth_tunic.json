@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "M M",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "voidrealm:phase_silk"
+    }
+  },
+  "result": {
+    "id": "voidrealm:phase_cloth_tunic",
+    "count": 1
+  }
+}

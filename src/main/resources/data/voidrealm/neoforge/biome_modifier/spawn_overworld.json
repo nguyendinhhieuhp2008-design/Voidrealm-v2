@@ -1,0 +1,24 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#minecraft:is_overworld",
+  "spawners": [
+    {
+      "type": "voidrealm:void_walker",
+      "weight": 6,
+      "minCount": 1,
+      "maxCount": 2
+    },
+    {
+      "type": "voidrealm:rift_archer",
+      "weight": 4,
+      "minCount": 1,
+      "maxCount": 2
+    },
+    {
+      "type": "voidrealm:phase_stalker",
+      "weight": 2,
+      "minCount": 1,
+      "maxCount": 1
+    }
+  ]
+}

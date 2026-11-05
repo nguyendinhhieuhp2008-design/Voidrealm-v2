@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "MMM",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "voidrealm:void_steel_ingot"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_steel_helmet",
+    "count": 1
+  }
+}

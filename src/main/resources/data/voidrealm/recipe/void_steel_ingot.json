@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "voidrealm:void_shard"
+    },
+    {
+      "item": "voidrealm:void_shard"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "id": "voidrealm:void_steel_ingot",
+    "count": 1
+  }
+}

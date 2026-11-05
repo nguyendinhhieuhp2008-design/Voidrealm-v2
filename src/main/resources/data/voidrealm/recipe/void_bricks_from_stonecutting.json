@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "voidrealm:void_stone"
+  },
+  "result": {
+    "id": "voidrealm:void_bricks",
+    "count": 1
+  }
+}

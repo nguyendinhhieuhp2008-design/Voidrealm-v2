@@ -1,0 +1,34 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="Claude & Người chơi"
+description='''
+Void Realm (Cõi Hư Không) - mang vũ khí, giáp, vật phẩm, quái vật và công trình từ một không gian khác vào thế giới của bạn.
+
+- Thép Hư Không: bộ công cụ + giáp
+- Vũ khí đặc biệt: Kiếm Xé Không Gian, Lưỡi Hái Hư Vô, Giáo Xuyên Hư Không, Trượng Trọng Lực
+- Giáp Hư Ảnh (nhẹ, tăng tốc)
+- 6 quái vật mới, trong đó có boss Chúa Tể Hư Không
+- 3 công trình mới: Tháp Bia, Phế Tích, Thành Trì Hư Không
+
+Thiết kế nhẹ cho thiết bị di động (Zalith Launcher 2): dùng model vanilla, texture 16x16, ít hạt (particle) và có file cấu hình.
+'''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

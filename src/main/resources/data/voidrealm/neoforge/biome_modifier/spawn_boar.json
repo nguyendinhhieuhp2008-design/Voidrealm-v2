@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#voidrealm:boar_habitat",
+  "spawners": [
+    {
+      "type": "voidrealm:void_boar",
+      "weight": 8,
+      "minCount": 2,
+      "maxCount": 3
+    }
+  ]
+}

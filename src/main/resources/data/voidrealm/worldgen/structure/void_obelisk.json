@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": "#voidrealm:has_structure/void_obelisk",
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
+  "spawn_overrides": {
+    "monster": {
+      "bounding_box": "full",
+      "spawns": [
+        {
+          "type": "voidrealm:rift_archer",
+          "weight": 1,
+          "minCount": 1,
+          "maxCount": 2
+        },
+        {
+          "type": "voidrealm:phase_stalker",
+          "weight": 1,
+          "minCount": 1,
+          "maxCount": 1
+        }
+      ]
+    }
+  },
+  "start_pool": "voidrealm:void_obelisk",
+  "size": 1,
+  "start_height": {
+    "absolute": -2
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "max_distance_from_center": 80,
+  "use_expansion_hack": false
+}
