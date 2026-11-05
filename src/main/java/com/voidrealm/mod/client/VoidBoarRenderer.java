@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.voidrealm.mod.VoidRealm;
 import com.voidrealm.mod.entity.VoidBoar;
 import net.minecraft.client.model.PigModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +14,7 @@ public class VoidBoarRenderer extends MobRenderer<VoidBoar, PigModel<VoidBoar>> 
             ResourceLocation.fromNamespaceAndPath(VoidRealm.MODID, "textures/entity/void_boar.png");
 
     public VoidBoarRenderer(EntityRendererProvider.Context context) {
-        super(context, new PigModel<>(context.bakeLayer(ModelLayers.PIG)), 0.7F);
+        super(context, new PigModel<>(context.bakeLayer(ModModelLayers.VOID_BOAR)), 0.7F);
         this.addLayer(new GlowLayer<VoidBoar, PigModel<VoidBoar>>(this, "void_boar"));
     }
 

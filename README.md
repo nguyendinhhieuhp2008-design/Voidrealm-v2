@@ -32,3 +32,11 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 ## Tùy chỉnh
 - `tools/gen_art.py` (đồ họa nâng cấp, chạy cái này để sinh lại toàn bộ texture), `tools/gen_textures.py`, `tools/gen_data.py`, `tools/gen_structures.py` sinh lại texture, model/lang/công thức/loot/worldgen và công trình (.nbt).
 - Bản mod này viết trên API NeoForge 21.1.x; môi trường tạo ra nó không biên dịch được, nên nếu build báo lỗi hãy gửi nội dung lỗi để sửa.
+
+
+## Mo hinh 3D (ban moi)
+- Vu khi/dung cu/vat pham (kiem, cuoc, riu, xeng, cuoc dat, Rift Blade, Void Reaper, Voidpiercer, Gravity Staff, manh vo, thoi thep, to, loi, tao) la model 3D nhieu khoi, co phan phat sang.
+- Den Khe Nut la model 3D (khung + loi xoay phat sang); quang co tinh the 3D moc ra.
+- Quai vat co sung, ao choang, canh, duoi, giap vai, nga, tinh the tren lung (ModelExtras).
+- Sinh bang: python3 tools/gen_data.py && python3 tools/gen_models.py
+- Neu vu khi cam tay bi nghieng nguoc: doi DIAG = -45 thanh 45 trong tools/gen_models.py roi chay lai.

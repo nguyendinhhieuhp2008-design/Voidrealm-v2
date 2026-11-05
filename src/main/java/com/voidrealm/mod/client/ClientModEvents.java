@@ -16,15 +16,25 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 public class ClientModEvents {
 
     @SubscribeEvent
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ModModelLayers.VOID_WALKER, ModelExtras::voidWalker);
+        event.registerLayerDefinition(ModModelLayers.PHASE_STALKER, ModelExtras::phaseStalker);
+        event.registerLayerDefinition(ModModelLayers.RIFT_BRUTE, ModelExtras::riftBrute);
+        event.registerLayerDefinition(ModModelLayers.VOID_SOVEREIGN, ModelExtras::voidSovereign);
+        event.registerLayerDefinition(ModModelLayers.RIFT_ARCHER, ModelExtras::riftArcher);
+        event.registerLayerDefinition(ModModelLayers.VOID_BOAR, ModelExtras::voidBoar);
+    }
+
+    @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.VOID_WALKER.get(),
-                context -> new VoidHumanoidRenderer<VoidWalker>(context, "void_walker", 1.0F, 0.5F));
+                context -> new VoidHumanoidRenderer<VoidWalker>(context, ModModelLayers.VOID_WALKER, "void_walker", 1.0F, 0.5F));
         event.registerEntityRenderer(ModEntities.PHASE_STALKER.get(),
-                context -> new VoidHumanoidRenderer<PhaseStalker>(context, "phase_stalker", 1.05F, 0.5F));
+                context -> new VoidHumanoidRenderer<PhaseStalker>(context, ModModelLayers.PHASE_STALKER, "phase_stalker", 1.05F, 0.5F));
         event.registerEntityRenderer(ModEntities.RIFT_BRUTE.get(),
-                context -> new VoidHumanoidRenderer<RiftBrute>(context, "rift_brute", 1.4F, 0.9F));
+                context -> new VoidHumanoidRenderer<RiftBrute>(context, ModModelLayers.RIFT_BRUTE, "rift_brute", 1.4F, 0.9F));
         event.registerEntityRenderer(ModEntities.VOID_SOVEREIGN.get(),
-                context -> new VoidHumanoidRenderer<VoidSovereign>(context, "void_sovereign", 1.9F, 1.4F));
+                context -> new VoidHumanoidRenderer<VoidSovereign>(context, ModModelLayers.VOID_SOVEREIGN, "void_sovereign", 1.9F, 1.4F));
         event.registerEntityRenderer(ModEntities.RIFT_ARCHER.get(), RiftArcherRenderer::new);
         event.registerEntityRenderer(ModEntities.VOID_BOAR.get(), VoidBoarRenderer::new);
     }

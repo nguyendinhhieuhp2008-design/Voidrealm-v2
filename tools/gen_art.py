@@ -63,9 +63,31 @@ class Skin:
         self.img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         self.glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         self.parts = {}
+        self.occ = set()
 
     def part(self, name, u, v, w, h, d):
         self.parts[name] = (u, v, w, h, d)
+        if not hasattr(self, "occ"):
+            self.occ = set()
+        for yy in range(v, min(self.h, v + d + h)):
+            for xx in range(u, min(self.w, u + 2 * d + 2 * w)):
+                self.occ.add((xx, yy))
+
+    def alloc(self, name, w, h, d):
+        """Tim cho trong tren texture de dat mot hop moi (w x h x d)."""
+        rw, rh = 2 * d + 2 * w, d + h
+        for v in range(0, self.h - rh + 1):
+            for u in range(0, self.w - rw + 1):
+                if all((xx, yy) not in self.occ for yy in range(v, v + rh) for xx in range(u, u + rw)):
+                    self.part(name, u, v, w, h, d)
+                    return u, v
+        raise RuntimeError("het cho tren texture cho " + name)
+
+    def glow_part(self, name):
+        for face, (fx, fy, fw, fh) in faces(*self.parts[name]).items():
+            for yy in range(fy, fy + fh):
+                for xx in range(fx, fx + fw):
+                    self.glow.putpixel((xx, yy), self.img.getpixel((xx, yy)))
 
     def rect(self, name, face):
         u, v, w, h, d = self.parts[name]
@@ -171,6 +193,7 @@ def void_walker():
         s.put(a, "front", 1, 7, VI, True)
     for l in ("rleg", "lleg"):
         s.band(l, ("front", "back", "left", "right"), 10, 11, [(6, 3, 12), (20, 12, 36)], 0.5)
+    add_extras(s, "void_walker")
     s.save(os.path.join(ENTITY_DIR, "void_walker"))
 
 
@@ -207,6 +230,7 @@ def phase_stalker():
         for y in range(1, 11):
             s.put(l, "left" if l == "rleg" else "right", 1, y, MG, True)
         s.band(l, ("front", "back", "left", "right"), 10, 11, [(6, 2, 10), (24, 8, 36)], 0.4)
+    add_extras(s, "phase_stalker")
     s.save(os.path.join(ENTITY_DIR, "phase_stalker"))
 
 
@@ -246,6 +270,7 @@ def rift_brute():
         s.put(l, "front", 2, 4, OR, True)
         s.put(l, "front", 2, 5, OR, True)
         s.band(l, ("front", "back", "left", "right"), 10, 11, [(24, 20, 34), (56, 50, 74)], 0.4)
+    add_extras(s, "rift_brute")
     s.save(os.path.join(ENTITY_DIR, "rift_brute"))
 
 
@@ -285,6 +310,7 @@ def void_sovereign():
         s.band(l, ("front", "back", "left", "right"), 8, 11, GOLD, 0.45)
         s.put(l, "front", 1, 4, VI, True)
         s.put(l, "front", 2, 5, VI, True)
+    add_extras(s, "void_sovereign")
     s.save(os.path.join(ENTITY_DIR, "void_sovereign"))
 
 
@@ -316,6 +342,7 @@ def rift_archer():
     s.put("rarm", "front", 1, 8, CY, True)
     s.band("rarm", ("front", "back", "left", "right"), 5, 5, [(40, 34, 60), (90, 82, 124)])
     s.band("rleg", ("front", "back", "left", "right"), 5, 5, [(40, 34, 60), (90, 82, 124)])
+    add_extras(s, "rift_archer")
     s.save(os.path.join(ENTITY_DIR, "rift_archer"))
 
 
@@ -345,6 +372,7 @@ def void_boar():
             s.put("body", "back", x, y, VI, True)
         s.put("body", "back", 4, y - 1 if y > 0 else y, CY, True)
     s.band("leg", ("front", "back", "left", "right"), 5, 5, [(10, 6, 18), (30, 20, 46)], 0.4)
+    add_extras(s, "void_boar")
     s.save(os.path.join(ENTITY_DIR, "void_boar"))
 
 
@@ -585,6 +613,192 @@ def make_items():
             polish_item(os.path.join(ITEM_DIR, fn))
 
 
+# ------------------------------------------------------------------ Phan 3D them cho quai (sinh Java + texture)
+EXTRAS = {}          # mob -> [dict]
+ARM_PARENTS = {"right_arm": "left_arm", "right_leg": "left_leg"}
+ROBE = [(10, 6, 20), (24, 14, 44), (48, 30, 86), (84, 58, 140)]
+HIDE = [(18, 6, 28), (48, 14, 66), (98, 30, 120), (160, 66, 186)]
+OBSID = [(6, 3, 12), (16, 9, 30), (38, 22, 64), (78, 52, 118)]
+VIOL = [(60, 30, 130), (130, 80, 230), (190, 150, 255), (240, 225, 255)]
+PINK = [(120, 20, 110), (230, 60, 200), (255, 150, 235), (255, 235, 255)]
+CYANR = [(30, 110, 150), (80, 200, 240), (160, 240, 255), (240, 255, 255)]
+IVORY = [(120, 108, 92), (180, 168, 148), (226, 218, 198), (250, 246, 232)]
+LEATH = [(30, 18, 16), (66, 40, 30), (104, 66, 44), (140, 96, 64)]
+CLOTH = [(12, 10, 26), (28, 24, 54), (50, 44, 92), (78, 70, 130)]
+BONEC = [(60, 54, 90), (112, 104, 150), (170, 164, 204), (222, 218, 240)]
+FURC = [(22, 14, 36), (46, 30, 72), (80, 54, 118), (122, 90, 164)]
+
+
+def ex(s, mob, parent, name, size, origin, pose, rot=(0, 0, 0), ramp=ROBE, base=0.5, glow=False,
+       twin=False, uv_of=None, fn=None):
+    w, h, d = size
+    if uv_of:
+        u, v = EXTRAS_UV[(mob, uv_of)]
+    else:
+        u, v = s.alloc(name, w, h, d)
+        s.paint(name, ramp, base)
+        if fn:
+            fn(s, name)
+        if glow:
+            s.glow_part(name)
+    EXTRAS_UV[(mob, name)] = (u, v)
+    EXTRAS.setdefault(mob, []).append(dict(parent=parent, name=name, u=u, v=v, size=size, origin=origin,
+                                           pose=pose, rot=rot, mirror=False))
+    if twin:
+        tp = ARM_PARENTS.get(parent, parent)
+        EXTRAS[mob].append(dict(parent=tp, name=name + "_l", u=u, v=v, size=size, origin=origin,
+                                pose=(-pose[0], pose[1], pose[2]), rot=(rot[0], -rot[1], -rot[2]), mirror=True))
+
+
+EXTRAS_UV = {}
+
+
+def trim_gold(rows):
+    def fn(s, name):
+        for face in ("front", "back", "left", "right"):
+            s.band(name, (face,), rows[0], rows[1], GOLD, 0.6)
+    return fn
+
+
+def add_extras(s, mob):
+    if mob == "void_walker":
+        ex(s, mob, "head", "hood_peak", (4, 3, 5), (-2, -1.5, -0.5), (0, -8.2, 2.0), (-25, 0, 0), ROBE, 0.5)
+        ex(s, mob, "body", "cloak", (10, 14, 1), (-5, 0, 0), (0, 0.5, 2.3), (4, 0, 0), ROBE, 0.4)
+        ex(s, mob, "body", "cloak_hem", (10, 5, 1), (-5, 0, 0), (0, 14.3, 2.6), (8, 0, 0), ROBE, 0.3)
+        ex(s, mob, "body", "shard", (1, 3, 1), (-0.5, -1.5, -0.5), (8.5, -3, 0), (0, 0, 15), VIOL, 0.6, glow=True, twin=True)
+    elif mob == "phase_stalker":
+        ex(s, mob, "head", "crest_a", (1, 4, 1), (-0.5, -4, -0.5), (0, -8, -1), (-20, 0, 0), HIDE, 0.6)
+        ex(s, mob, "head", "crest_b", (1, 5, 1), (-0.5, -5, -0.5), (0, -8, 1), (-35, 0, 0), HIDE, 0.6)
+        ex(s, mob, "head", "crest_c", (1, 5, 1), (-0.5, -5, -0.5), (0, -8, 3), (-50, 0, 0), PINK, 0.5, glow=True)
+        for i, (py, rx) in enumerate(((1.0, 35), (4.5, 40), (8.0, 50))):
+            ex(s, mob, "body", f"spine_{i}", (1, 5, 1), (-0.5, 0, 0), (0, py, 2.2), (rx, 0, 0), PINK, 0.45, glow=True,
+               uv_of="spine_0" if i else None)
+        ex(s, mob, "body", "tail_a", (2, 2, 7), (-1, 0, 0), (0, 10.5, 2), (25, 0, 0), HIDE, 0.5)
+        ex(s, mob, "body", "tail_b", (1, 1, 5), (-0.5, 0, 0), (0, 12.5, 8), (40, 0, 0), PINK, 0.5, glow=True)
+        for i, dx in enumerate((-1.5, 0.0, 1.5)):
+            ex(s, mob, "right_arm", f"claw_{i}", (1, 4, 1), (-0.5, 0, -0.5), (-1 + dx, 12, 0), (-10, 0, 0), IVORY, 0.55,
+               twin=True, uv_of="claw_0" if i else None)
+    elif mob == "rift_brute":
+        ex(s, mob, "head", "horn_base", (2, 4, 2), (-1, -4, -1), (4.3, -7.5, 0), (0, 0, -28), IVORY, 0.5, twin=True)
+        ex(s, mob, "head", "horn_tip", (1, 3, 1), (-0.5, -3, -0.5), (6.4, -11, 0), (0, 0, -50), IVORY, 0.65, twin=True)
+        ex(s, mob, "right_arm", "pauldron", (6, 2, 6), (-3, -1, -3), (-1, -1.5, 0), (0, 0, 0), STONE_M, 0.6, twin=True)
+        ex(s, mob, "right_arm", "p_spike", (1, 3, 1), (-0.5, -3, -0.5), (-1, -3, 0), (0, 0, 0), STONE_M, 0.7, twin=True)
+        ex(s, mob, "right_arm", "fist", (5, 3, 5), (-2.5, 0, -2.5), (-1, 10, 0), (0, 0, 0), STONE_M, 0.45, twin=True,
+           fn=lambda s_, n: s_.band(n, ("front", "back", "left", "right"), 2, 2, [(40, 20, 8), OR], 0.7))
+        ex(s, mob, "body", "back_plate", (7, 8, 1), (-3.5, 0, 0), (0, 0.5, 2.2), (0, 0, 0), STONE_M, 0.55)
+        for i, (px, py) in enumerate(((-2.5, 3.0), (0.0, 6.0), (2.5, 3.0))):
+            ex(s, mob, "body", f"b_spike_{i}", (1, 1, 3), (-0.5, -0.5, 0), (px, py, 3.2), (0, 0, 0), STONE_M, 0.7,
+               uv_of="b_spike_0" if i else None)
+        ex(s, mob, "body", "skirt", (8, 2, 4), (-4, 0, -2), (0, 10.5, 0), (0, 0, 0), [(24, 20, 34), (56, 50, 74), (90, 82, 112), (130, 120, 156)], 0.5)
+    elif mob == "void_sovereign":
+        for i, (px, pz) in enumerate(((0, -3.6), (3.4, -3.4), (-3.4, -3.4), (0, 3.6), (3.4, 3.4), (-3.4, 3.4))):
+            ex(s, mob, "head", f"cspike_{i}", (1, 3, 1), (-0.5, -3, -0.5), (px, -8.2, pz), (0, 0, 0), GOLD, 0.6,
+               uv_of="cspike_0" if i else None)
+        ex(s, mob, "head", "horn_1", (2, 5, 2), (-1, -5, -1), (3.2, -8, 0), (0, 0, -20), OBSID, 0.5, twin=True)
+        ex(s, mob, "head", "horn_2", (2, 4, 2), (-1, -4, -1), (5.4, -12.6, 0), (0, 0, -45), OBSID, 0.5, twin=True)
+        ex(s, mob, "head", "horn_3", (1, 3, 1), (-0.5, -3, -0.5), (8.6, -15.2, 0), (0, 0, -75), PINK, 0.5, glow=True, twin=True)
+        ex(s, mob, "body", "cape", (10, 14, 1), (-5, 0, 0), (0, 0.5, 2.4), (5, 0, 0), OBSID, 0.4)
+        ex(s, mob, "body", "cape_low", (10, 8, 1), (-5, 0, 0), (0, 14.2, 3.6), (10, 0, 0), OBSID, 0.35,
+           fn=lambda s_, n: s_.band(n, ("front", "back"), 7, 7, GOLD, 0.6))
+        ex(s, mob, "right_arm", "sh_spike", (1, 4, 1), (-0.5, -4, -0.5), (-1, -2, 0), (0, 0, 20), GOLD, 0.6, twin=True)
+        ex(s, mob, "body", "blade_a", (1, 10, 2), (-0.5, -10, -1), (3.5, 3, 3.5), (0, 0, -25), VIOL, 0.55, glow=True, twin=True)
+        ex(s, mob, "body", "blade_b", (1, 8, 2), (-0.5, -8, -1), (3.5, 5, 3.2), (0, 0, -55), VIOL, 0.45, glow=True, twin=True)
+        ex(s, mob, "body", "core_gem", (4, 4, 1), (-2, 0, -0.5), (0, 3, -2.3), (0, 0, 0), PINK, 0.6, glow=True)
+    elif mob == "rift_archer":
+        ex(s, mob, "head", "hood_tip", (4, 3, 4), (-2, -1.5, -0.5), (0, -8.3, 1.5), (-20, 0, 0), CLOTH, 0.5)
+        ex(s, mob, "body", "quiver", (2, 6, 2), (-1, 0, 0), (2.5, 1, 2.8), (0, 0, 10), LEATH, 0.5)
+        for i, dx in enumerate((1.5, 3.5)):
+            ex(s, mob, "body", f"arrow_{i}", (1, 3, 1), (-0.5, -3, -0.5), (dx, 1.2, 3.0), (0, 0, 10), CYANR, 0.6,
+               glow=(i == 0), uv_of="arrow_0" if i else None)
+        ex(s, mob, "body", "scarf_tail", (2, 6, 1), (-1, 0, 0), (3, 0.5, 3.2), (8, 0, 0), CLOTH, 0.5)
+    elif mob == "void_boar":
+        ex(s, mob, "head", "tusk_a", (1, 1, 3), (-0.5, -0.5, -1.5), (3, 2.5, -9.5), (0, 0, 0), IVORY, 0.55, twin=True)
+        ex(s, mob, "head", "tusk_b", (1, 3, 1), (-0.5, -3, -0.5), (3, 2.2, -11), (-15, 0, 0), IVORY, 0.65, twin=True)
+        ex(s, mob, "head", "crest", (2, 2, 4), (-1, -2, -2), (0, -3.8, -4), (0, 0, 0), FURC, 0.6)
+        for i, (py, sz) in enumerate(((-6, (2, 2, 4)), (-1, (2, 2, 3)), (4, (2, 2, 4)))):
+            ex(s, mob, "body", f"crystal_{i}", sz, (-sz[0] / 2, -sz[1] / 2, 0), (0, py, 1), (10 if i == 1 else -10, 0, 0),
+               VIOL, 0.6, glow=True)
+
+
+def java_f(v):
+    return ("%.2f" % v).rstrip("0").rstrip(".") + "F" if v != int(v) else "%d.0F" % int(v)
+
+
+def write_java():
+    def lines(mob):
+        out = []
+        for e in EXTRAS.get(mob, []):
+            w, h, d = e["size"]
+            ox, oy, oz = e["origin"]
+            if e["mirror"]:
+                ox = -ox - w
+            px, py, pz = e["pose"]
+            rx, ry, rz = e["rot"]
+            cube = "CubeListBuilder.create().texOffs(%d, %d)%s.addBox(%s, %s, %s, %s, %s, %s)" % (
+                e["u"], e["v"], ".mirror()" if e["mirror"] else "", java_f(ox), java_f(oy), java_f(oz),
+                java_f(w), java_f(h), java_f(d))
+            pose = "PartPose.offsetAndRotation(%s, %s, %s, r(%s), r(%s), r(%s))" % (
+                java_f(px), java_f(py), java_f(pz), java_f(rx), java_f(ry), java_f(rz))
+            out.append('        root.getChild("%s").addOrReplaceChild("%s", %s, %s);' % (e["parent"], e["name"], cube, pose))
+        return "\n".join(out)
+
+    humanoid = """    public static LayerDefinition %s() {
+        MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
+        PartDefinition root = mesh.getRoot();
+%s
+        return LayerDefinition.create(mesh, 64, 64);
+    }
+"""
+    src = """package com.voidrealm.mod.client;
+
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.QuadrupedModel;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+
+/**
+ * DO TOOLS/gen_art.py SINH RA - khong sua tay. Model 3D rieng cua quai: giu khung vanilla (nhe)
+ * va gan them sung, mu, ao choang, canh, duoi, nanh... vao cac bo phan co san.
+ */
+public final class ModelExtras {
+    private static float r(float degrees) {
+        return (float) Math.toRadians(degrees);
+    }
+
+""" + humanoid % ("voidWalker", lines("void_walker")) + "\n" + humanoid % ("phaseStalker", lines("phase_stalker")) \
+        + "\n" + humanoid % ("riftBrute", lines("rift_brute")) + "\n" + humanoid % ("voidSovereign", lines("void_sovereign")) + """
+    public static LayerDefinition riftArcher() {
+        MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
+        PartDefinition root = mesh.getRoot();
+        root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 16).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(-5.0F, 2.0F, 0.0F));
+        root.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(40, 16).mirror().addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(5.0F, 2.0F, 0.0F));
+        root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(-2.0F, 12.0F, 0.0F));
+        root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(2.0F, 12.0F, 0.0F));
+""" + lines("rift_archer") + """
+        return LayerDefinition.create(mesh, 64, 32);
+    }
+
+    public static LayerDefinition voidBoar() {
+        MeshDefinition mesh = QuadrupedModel.createBodyMesh(6, CubeDeformation.NONE);
+        PartDefinition root = mesh.getRoot();
+        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -8.0F, 8.0F, 8.0F, 8.0F)
+                .texOffs(16, 16).addBox(-2.0F, 0.0F, -9.0F, 4.0F, 3.0F, 1.0F), PartPose.offset(0.0F, 12.0F, -6.0F));
+""" + lines("void_boar") + """
+        return LayerDefinition.create(mesh, 64, 32);
+    }
+
+    private ModelExtras() {
+    }
+}
+"""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "main", "java", "com", "voidrealm", "mod", "client", "ModelExtras.java")
+    open(path, "w", encoding="utf-8").write(src)
+
+
 if __name__ == "__main__":
     make_items()
     make_blocks()
@@ -598,4 +812,5 @@ if __name__ == "__main__":
           [(60, 150, 190), (120, 224, 255), (190, 246, 255), (255, 255, 255)], False, False, 40)
     armor("phase_cloth", [(60, 18, 78), (118, 44, 150), (186, 92, 214), (240, 160, 255)],
           [(150, 40, 130), (255, 92, 225), (255, 160, 240), (255, 240, 255)], False, True, 50)
+    write_java()
     print("Da sinh do hoa nang cap")

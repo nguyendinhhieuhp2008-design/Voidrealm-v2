@@ -33,6 +33,11 @@ HANDHELD = ["void_steel_sword", "void_steel_pickaxe", "void_steel_axe", "void_st
 MOBS = ["void_walker", "rift_archer", "phase_stalker", "void_boar", "rift_brute", "void_sovereign"]
 
 # ---------------------------------------------------------------- models
+MODELED = {"void_shard", "void_steel_ingot", "phase_silk", "rift_core", "void_apple", "void_steel_sword", "void_steel_pickaxe",
+           "void_steel_axe", "void_steel_shovel", "void_steel_hoe", "rift_blade", "void_reaper", "voidpiercer", "gravity_staff"}
+BLOCK_MODELED = {"void_crystal_ore", "deepslate_void_crystal_ore", "rift_lantern"}
+GENERATED = [n for n in GENERATED if n not in MODELED]
+HANDHELD = [n for n in HANDHELD if n not in MODELED]
 for n in GENERATED:
     w(f"assets/{NS}/models/item/{n}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": V("item/" + n)}})
 for n in HANDHELD:
@@ -40,6 +45,10 @@ for n in HANDHELD:
 for n in MOBS:
     w(f"assets/{NS}/models/item/{n}_spawn_egg.json", {"parent": "minecraft:item/template_spawn_egg"})
 for n in BLOCKS:
+    if n in BLOCK_MODELED:
+        w(f"assets/{NS}/models/item/{n}.json", {"parent": V("block/" + n)})
+        w(f"assets/{NS}/blockstates/{n}.json", {"variants": {"": {"model": V("block/" + n)}}})
+        continue
     w(f"assets/{NS}/models/block/{n}.json", {"parent": "minecraft:block/cube_all", "textures": {"all": V("block/" + n)}})
     w(f"assets/{NS}/models/item/{n}.json", {"parent": V("block/" + n)})
     w(f"assets/{NS}/blockstates/{n}.json", {"variants": {"": {"model": V("block/" + n)}}})

@@ -3,7 +3,6 @@ package com.voidrealm.mod.client;
 import com.voidrealm.mod.VoidRealm;
 import com.voidrealm.mod.entity.RiftArcher;
 import net.minecraft.client.model.SkeletonModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +13,7 @@ public class RiftArcherRenderer extends HumanoidMobRenderer<RiftArcher, Skeleton
             ResourceLocation.fromNamespaceAndPath(VoidRealm.MODID, "textures/entity/rift_archer.png");
 
     public RiftArcherRenderer(EntityRendererProvider.Context context) {
-        super(context, new SkeletonModel<>(context.bakeLayer(ModelLayers.SKELETON)), 0.5F);
+        super(context, new SkeletonModel<>(context.bakeLayer(ModModelLayers.RIFT_ARCHER)), 0.5F);
         this.addLayer(new GlowLayer<RiftArcher, SkeletonModel<RiftArcher>>(this, "rift_archer"));
     }
 

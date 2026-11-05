@@ -56,6 +56,7 @@ public class ModBlocks {
                     .mapColor(MapColor.COLOR_PURPLE)
                     .strength(1.5F)
                     .lightLevel(state -> 13)
+                    .noOcclusion()
                     .emissiveRendering((state, level, pos) -> true)
                     .sound(SoundType.GLASS)));
 
