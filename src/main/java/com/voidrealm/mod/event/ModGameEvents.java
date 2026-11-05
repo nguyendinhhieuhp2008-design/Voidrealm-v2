@@ -14,6 +14,9 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.tags.DamageTypeTags;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -47,6 +50,25 @@ public class ModGameEvents {
             if (player.level() instanceof ServerLevel level) {
                 Fx.burst(level, player.getX(), player.getY() + 0.9D, player.getZ(), ParticleTypes.REVERSE_PORTAL, 3, 0.4D, 0.02D);
             }
+        }
+    }
+
+    /** Bo Hu Anh: khong nhan sat thuong khi roi. */
+    @SubscribeEvent
+    public static void onFall(LivingFallEvent event) {
+        if (event.getEntity() instanceof Player player && Config.ARMOR_SET_BONUS.get()
+                && wearsFullSet(player, ModArmorMaterials.PHASE_CLOTH)) {
+            event.setDamageMultiplier(0.0F);
+        }
+    }
+
+    /** Bo Thep Hu Khong: giam 50% sat thuong no. */
+    @SubscribeEvent
+    public static void onIncomingDamage(LivingIncomingDamageEvent event) {
+        if (event.getEntity() instanceof Player player && Config.ARMOR_SET_BONUS.get()
+                && event.getSource().is(DamageTypeTags.IS_EXPLOSION)
+                && wearsFullSet(player, ModArmorMaterials.VOID_STEEL)) {
+            event.setAmount(event.getAmount() * 0.5F);
         }
     }
 

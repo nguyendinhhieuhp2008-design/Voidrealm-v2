@@ -40,3 +40,8 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 - Quai vat co sung, ao choang, canh, duoi, giap vai, nga, tinh the tren lung (ModelExtras).
 - Sinh bang: python3 tools/gen_data.py && python3 tools/gen_models.py
 - Neu vu khi cam tay bi nghieng nguoc: doi DIAG = -45 thanh 45 trong tools/gen_models.py roi chay lai.
+
+## Giap v3
+- Texture giap mac tren nguoi + icon ve lai bang tools/gen_armor.py (chay SAU gen_art.py).
+- Bo Thep Hu Khong: khang sat thuong + chay lua, giam 50% sat thuong no.
+- Bo Hu Anh: nhanh + nhay cao, khong mat mau khi roi.
