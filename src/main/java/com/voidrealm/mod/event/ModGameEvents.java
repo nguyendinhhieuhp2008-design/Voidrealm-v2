@@ -4,10 +4,12 @@ import com.voidrealm.mod.Config;
 import com.voidrealm.mod.VoidRealm;
 import com.voidrealm.mod.effect.Fx;
 import com.voidrealm.mod.registry.ModArmorMaterials;
+import com.voidrealm.mod.registry.ModItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -31,6 +33,7 @@ public class ModGameEvents {
             return;
         }
         boolean applyEffects = player.tickCount % 20 == 0;
+        applyEyeOfTheVoid(player);
 
         if (wearsFullSet(player, ModArmorMaterials.VOID_STEEL)) {
             if (applyEffects) {
@@ -50,6 +53,18 @@ public class ModGameEvents {
             if (player.level() instanceof ServerLevel level) {
                 Fx.burst(level, player.getX(), player.getY() + 0.9D, player.getZ(), ParticleTypes.REVERSE_PORTAL, 3, 0.4D, 0.02D);
             }
+        }
+    }
+
+    /** Mat Nhin Thuc Tai: lam moi sinh vat (ke ca tang hinh) quanh nguoi cam phat sang xuyen tuong. */
+    private static void applyEyeOfTheVoid(Player player) {
+        if (!player.getMainHandItem().is(ModItems.EYE_OF_THE_VOID.get())
+                && !player.getOffhandItem().is(ModItems.EYE_OF_THE_VOID.get())) {
+            return;
+        }
+        for (LivingEntity target : player.level().getEntitiesOfClass(LivingEntity.class,
+                player.getBoundingBox().inflate(24.0D), e -> e != player && e.isAlive())) {
+            target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 30, 0, true, false, false));
         }
     }
 

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SES",
+    "ECE",
+    "SES"
+  ],
+  "key": {
+    "S": {
+      "item": "voidrealm:void_shard"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "voidrealm:rift_core"
+    }
+  },
+  "result": {
+    "id": "voidrealm:eye_of_the_void",
+    "count": 1
+  }
+}

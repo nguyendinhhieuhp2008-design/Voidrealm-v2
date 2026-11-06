@@ -45,3 +45,14 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 - Texture giap mac tren nguoi + icon ve lai bang tools/gen_armor.py (chay SAU gen_art.py).
 - Bo Thep Hu Khong: khang sat thuong + chay lua, giam 50% sat thuong no.
 - Bo Hu Anh: nhanh + nhay cao, khong mat mau khi roi.
+
+## Phep thuat & Magitech (ban moi)
+- **Truong Bop Me Khong Gian (Warp Rod)**: chuot phai tao lo den hut quai vat roi no.
+- **Mat Nhin Thuc Tai (Eye of the Void)**: cam tren tay -> khung mau xuyen tuong quanh quang, sinh vat (ke ca tang hinh) phat sang.
+- **May Dich Chuyen Tuc Thoi (Void Gateway)**: dat >= 2 may, chuot phai de nhay sang may ke tiep (Shift: may truoc). Ton Manh Hu Khong trong tui do (xa/khac chieu hon ton nhieu hon).
+- **Thac Nuoc Nguoc (Void Flux)**: dat lo, phun dong chay nguoc len troi toi da 28 khoi; sinh vat va vat roi bi day bay len, giu Shift de lo lung.
+- **Void Wisp** (dung Loi Wisp hoac trung): dong hanh bay quanh, toa sang, tu nhat vat pham roi xuong vuc.
+- **Chim Rinh Rap Hu Khong**: xuat hien o End va vung nui; cho an Tao/Banh Hu Khong de thuan hoa, chuot phai de cuoi (nhin len/xuong de bay, W lao toi, Shift xuong).
+- **Day Thung Trong Luc (Void Tether)**: chuot phai moc vao khoi, tu keo toi do; Shift tha; roi cham sau khi tha.
+- **Banh Chuoi Hu Khong (Void Fruit)**: an de co Levitation 3 giay + Slow Falling.
+- Thu tu sinh asset: gen_art -> gen_data -> gen_models -> gen_armor -> gen_magitech.

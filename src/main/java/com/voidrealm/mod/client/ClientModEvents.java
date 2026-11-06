@@ -6,6 +6,7 @@ import com.voidrealm.mod.entity.VoidSovereign;
 import com.voidrealm.mod.entity.RiftBrute;
 import com.voidrealm.mod.entity.PhaseStalker;
 import com.voidrealm.mod.entity.VoidWalker;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,6 +24,8 @@ public class ClientModEvents {
         event.registerLayerDefinition(ModModelLayers.VOID_SOVEREIGN, ModelExtras::voidSovereign);
         event.registerLayerDefinition(ModModelLayers.RIFT_ARCHER, ModelExtras::riftArcher);
         event.registerLayerDefinition(ModModelLayers.VOID_BOAR, ModelExtras::voidBoar);
+        event.registerLayerDefinition(ModModelLayers.VOID_WISP, MagitechModels::wisp);
+        event.registerLayerDefinition(ModModelLayers.VOID_STALKER_BIRD, MagitechModels::bird);
     }
 
     @SubscribeEvent
@@ -37,6 +40,9 @@ public class ClientModEvents {
                 context -> new VoidHumanoidRenderer<VoidSovereign>(context, ModModelLayers.VOID_SOVEREIGN, "void_sovereign", 1.9F, 1.4F));
         event.registerEntityRenderer(ModEntities.RIFT_ARCHER.get(), RiftArcherRenderer::new);
         event.registerEntityRenderer(ModEntities.VOID_BOAR.get(), VoidBoarRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLACK_HOLE.get(), NoopRenderer::new);
+        event.registerEntityRenderer(ModEntities.VOID_WISP.get(), VoidWispRenderer::new);
+        event.registerEntityRenderer(ModEntities.VOID_STALKER_BIRD.get(), VoidStalkerBirdRenderer::new);
     }
 
     private ClientModEvents() {

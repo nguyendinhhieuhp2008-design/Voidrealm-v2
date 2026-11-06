@@ -6,7 +6,9 @@ import com.voidrealm.mod.entity.RiftArcher;
 import com.voidrealm.mod.entity.RiftBrute;
 import com.voidrealm.mod.entity.VoidBoar;
 import com.voidrealm.mod.entity.VoidSovereign;
+import com.voidrealm.mod.entity.VoidStalkerBird;
 import com.voidrealm.mod.entity.VoidWalker;
+import com.voidrealm.mod.entity.VoidWisp;
 import com.voidrealm.mod.registry.ModEntities;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.monster.Monster;
@@ -28,6 +30,8 @@ public class ModBusEvents {
         event.put(ModEntities.VOID_BOAR.get(), VoidBoar.createAttributes().build());
         event.put(ModEntities.RIFT_BRUTE.get(), RiftBrute.createAttributes().build());
         event.put(ModEntities.VOID_SOVEREIGN.get(), VoidSovereign.createAttributes().build());
+        event.put(ModEntities.VOID_WISP.get(), VoidWisp.createAttributes().build());
+        event.put(ModEntities.VOID_STALKER_BIRD.get(), VoidStalkerBird.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -46,6 +50,9 @@ public class ModBusEvents {
                 RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(ModEntities.RIFT_BRUTE.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(ModEntities.VOID_STALKER_BIRD.get(), SpawnPlacementTypes.NO_RESTRICTIONS,
+                Heightmap.Types.MOTION_BLOCKING, (type, level, reason, pos, random) -> true,
                 RegisterSpawnPlacementsEvent.Operation.OR);
     }
 

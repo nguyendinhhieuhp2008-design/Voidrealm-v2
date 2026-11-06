@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " I ",
+    "SLS",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    },
+    "S": {
+      "item": "voidrealm:void_shard"
+    },
+    "L": {
+      "item": "minecraft:lead"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_tether",
+    "count": 1
+  }
+}

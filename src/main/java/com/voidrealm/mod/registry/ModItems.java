@@ -1,10 +1,14 @@
 package com.voidrealm.mod.registry;
 
 import com.voidrealm.mod.VoidRealm;
+import com.voidrealm.mod.item.EyeOfTheVoidItem;
 import com.voidrealm.mod.item.GravityStaffItem;
 import com.voidrealm.mod.item.RiftBladeItem;
 import com.voidrealm.mod.item.VoidPiercerItem;
 import com.voidrealm.mod.item.VoidReaperItem;
+import com.voidrealm.mod.item.VoidTetherItem;
+import com.voidrealm.mod.item.WarpRodItem;
+import com.voidrealm.mod.item.WispCoreItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -97,6 +101,30 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> GRAVITY_STAFF = ITEMS.register("gravity_staff",
             () -> new GravityStaffItem(new Item.Properties().stacksTo(1).durability(600).rarity(Rarity.RARE)));
 
+    // ---------------------------------------------------------------- Phep thuat & Magitech
+    public static final DeferredHolder<Item, Item> WARP_ROD = ITEMS.register("warp_rod",
+            () -> new WarpRodItem(new Item.Properties().stacksTo(1).durability(300).rarity(Rarity.EPIC)));
+
+    public static final DeferredHolder<Item, Item> EYE_OF_THE_VOID = ITEMS.register("eye_of_the_void",
+            () -> new EyeOfTheVoidItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+
+    public static final DeferredHolder<Item, Item> VOID_TETHER = ITEMS.register("void_tether",
+            () -> new VoidTetherItem(new Item.Properties().stacksTo(1).durability(250).rarity(Rarity.RARE)));
+
+    public static final DeferredHolder<Item, Item> WISP_CORE = ITEMS.register("wisp_core",
+            () -> new WispCoreItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant()));
+
+    public static final DeferredHolder<Item, Item> VOID_FRUIT = ITEMS.register("void_fruit",
+            () -> new Item(new Item.Properties()
+                    .rarity(Rarity.UNCOMMON)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(6)
+                            .saturationModifier(0.9F)
+                            .alwaysEdible()
+                            .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 60, 0), 1.0F)
+                            .effect(() -> new MobEffectInstance(MobEffects.SLOW_FALLING, 240, 0), 1.0F)
+                            .build())));
+
     // ---------------------------------------------------------------- Giap Thep Hu Khong
     public static final DeferredHolder<Item, Item> VOID_STEEL_HELMET =
             armor("void_steel_helmet", ModArmorMaterials.VOID_STEEL, ArmorItem.Type.HELMET, 40, true);
@@ -124,6 +152,10 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> VOID_STONE_ITEM = blockItem("void_stone", ModBlocks.VOID_STONE);
     public static final DeferredHolder<Item, Item> VOID_BRICKS_ITEM = blockItem("void_bricks", ModBlocks.VOID_BRICKS);
     public static final DeferredHolder<Item, Item> RIFT_LANTERN_ITEM = blockItem("rift_lantern", ModBlocks.RIFT_LANTERN);
+    public static final DeferredHolder<Item, Item> VOID_GATEWAY_ITEM = ITEMS.register("void_gateway",
+            () -> new BlockItem(ModBlocks.VOID_GATEWAY.get(), new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredHolder<Item, Item> VOID_FLUX_ITEM = ITEMS.register("void_flux",
+            () -> new BlockItem(ModBlocks.VOID_FLUX.get(), new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON)));
 
     // ---------------------------------------------------------------- Trung sinh quai
     public static final DeferredHolder<Item, Item> VOID_WALKER_SPAWN_EGG = ITEMS.register("void_walker_spawn_egg",
@@ -138,6 +170,11 @@ public class ModItems {
             () -> new DeferredSpawnEggItem(ModEntities.RIFT_BRUTE, 0x3A2A55, 0xFF8A3D, new Item.Properties()));
     public static final DeferredHolder<Item, Item> VOID_SOVEREIGN_SPAWN_EGG = ITEMS.register("void_sovereign_spawn_egg",
             () -> new DeferredSpawnEggItem(ModEntities.VOID_SOVEREIGN, 0x0B0614, 0xE040FF, new Item.Properties().rarity(Rarity.EPIC)));
+
+    public static final DeferredHolder<Item, Item> VOID_WISP_SPAWN_EGG = ITEMS.register("void_wisp_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.VOID_WISP, 0x1A3A5A, 0x9FFFFF, new Item.Properties()));
+    public static final DeferredHolder<Item, Item> VOID_STALKER_BIRD_SPAWN_EGG = ITEMS.register("void_stalker_bird_spawn_egg",
+            () -> new DeferredSpawnEggItem(ModEntities.VOID_STALKER_BIRD, 0x2A1450, 0x40E8FF, new Item.Properties()));
 
     // ---------------------------------------------------------------- Tro giup
     private static DeferredHolder<Item, Item> blockItem(String name, DeferredHolder<Block, Block> block) {

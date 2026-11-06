@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "SCS",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "S": {
+      "item": "voidrealm:void_shard"
+    },
+    "C": {
+      "item": "voidrealm:rift_core"
+    }
+  },
+  "result": {
+    "id": "voidrealm:wisp_core",
+    "count": 1
+  }
+}

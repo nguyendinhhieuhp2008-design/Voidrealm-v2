@@ -12,6 +12,8 @@ public final class ModModelLayers {
     public static final ModelLayerLocation VOID_SOVEREIGN = layer("void_sovereign");
     public static final ModelLayerLocation RIFT_ARCHER = layer("rift_archer");
     public static final ModelLayerLocation VOID_BOAR = layer("void_boar");
+    public static final ModelLayerLocation VOID_WISP = layer("void_wisp");
+    public static final ModelLayerLocation VOID_STALKER_BIRD = layer("void_stalker_bird");
 
     private static ModelLayerLocation layer(String name) {
         return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(VoidRealm.MODID, name), "main");

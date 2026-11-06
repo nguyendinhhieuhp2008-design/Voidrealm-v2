@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "voidrealm:blocks/void_flux",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "voidrealm:void_flux",
+          "properties": {
+            "age": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "voidrealm:void_flux"
+        }
+      ]
+    }
+  ]
+}

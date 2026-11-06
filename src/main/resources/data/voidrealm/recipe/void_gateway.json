@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "ICI",
+    "SRS",
+    "BBB"
+  ],
+  "key": {
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    },
+    "C": {
+      "item": "minecraft:ender_eye"
+    },
+    "S": {
+      "item": "voidrealm:void_shard"
+    },
+    "R": {
+      "item": "voidrealm:rift_core"
+    },
+    "B": {
+      "item": "voidrealm:void_bricks"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_gateway",
+    "count": 1
+  }
+}

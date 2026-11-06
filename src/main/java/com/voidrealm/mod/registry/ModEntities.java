@@ -2,7 +2,10 @@ package com.voidrealm.mod.registry;
 
 import com.voidrealm.mod.VoidRealm;
 import com.voidrealm.mod.entity.PhaseStalker;
+import com.voidrealm.mod.entity.BlackHole;
 import com.voidrealm.mod.entity.RiftArcher;
+import com.voidrealm.mod.entity.VoidStalkerBird;
+import com.voidrealm.mod.entity.VoidWisp;
 import com.voidrealm.mod.entity.RiftBrute;
 import com.voidrealm.mod.entity.VoidBoar;
 import com.voidrealm.mod.entity.VoidSovereign;
@@ -53,6 +56,28 @@ public class ModEntities {
                     .fireImmune()
                     .clientTrackingRange(12)
                     .build("void_sovereign"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BlackHole>> BLACK_HOLE = ENTITIES.register("black_hole",
+            () -> EntityType.Builder.<BlackHole>of(BlackHole::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .noSave()
+                    .fireImmune()
+                    .clientTrackingRange(10)
+                    .updateInterval(10)
+                    .build("black_hole"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<VoidWisp>> VOID_WISP = ENTITIES.register("void_wisp",
+            () -> EntityType.Builder.of(VoidWisp::new, MobCategory.CREATURE)
+                    .sized(0.5F, 0.6F)
+                    .fireImmune()
+                    .clientTrackingRange(10)
+                    .build("void_wisp"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<VoidStalkerBird>> VOID_STALKER_BIRD = ENTITIES.register("void_stalker_bird",
+            () -> EntityType.Builder.of(VoidStalkerBird::new, MobCategory.CREATURE)
+                    .sized(1.1F, 1.3F)
+                    .clientTrackingRange(10)
+                    .build("void_stalker_bird"));
 
     private ModEntities() {
     }

@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "voidrealm:block/void_flux"
+      }
+    }
+  ]
+}
