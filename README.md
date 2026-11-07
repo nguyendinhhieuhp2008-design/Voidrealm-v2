@@ -79,3 +79,6 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 ## Texture khối bản liền mạch
 - Mọi texture khối nền dùng nhiễu tuần hoàn (tileable) nên các khối cạnh nhau nối liền, không thấy đường ghép.
 - Đá Hư Không và Khối Tinh Thể xoay ngẫu nhiên 4 hướng (blockstate) để tránh lặp họa tiết.
+
+## Texture do người chơi tùy chỉnh
+Toàn bộ texture hiện là bản người dùng tự chỉnh (đã ghép vào repo). **Không chạy lại** `tools/gen_art.py`, `gen_armor.py`, `gen_blocks.py`, `gen_dream.py`... vì chúng sẽ ghi đè texture.
