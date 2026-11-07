@@ -171,11 +171,11 @@ public class DreamDrillItem extends PickaxeItem {
         level.playSound(null, player.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.PLAYERS, 0.6F, 1.6F);
     }
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
+    /** Goi tu DreamEvents (BlockEvent.BreakEvent): dao them 8 khoi quanh khoi dang dao khi bat che do 3x3. */
+    public static void breakArea(ItemStack stack, BlockPos pos, Player player) {
         Level level = player.level();
         if (level.isClientSide || breaking || !is3x3(stack) || !(player instanceof ServerPlayer sp)) {
-            return false;
+            return;
         }
         BlockHitResult hit = getPlayerPOVHitResult(level, player, ClipContext.Fluid.NONE);
         Direction face = hit.getType() == HitResult.Type.BLOCK ? hit.getDirection() : player.getDirection();
@@ -205,6 +205,5 @@ public class DreamDrillItem extends PickaxeItem {
         } finally {
             breaking = false;
         }
-        return false;
     }
 }

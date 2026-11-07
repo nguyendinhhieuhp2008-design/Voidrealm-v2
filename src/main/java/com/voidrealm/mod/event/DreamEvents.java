@@ -8,6 +8,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import com.voidrealm.mod.item.DreamDrillItem;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 /** Riu chien Mong Tinh xuyen giap; no Mong Tinh ban ten manh + xuyen. */
@@ -20,6 +22,13 @@ public class DreamEvents {
                 && event.getSource().getEntity() == attacker
                 && attacker.getMainHandItem().is(ModItems.DREAM_BATTLE_AXE.get())) {
             event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container, reduction) -> 0.0F);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (event.getPlayer().getMainHandItem().getItem() instanceof DreamDrillItem) {
+            DreamDrillItem.breakArea(event.getPlayer().getMainHandItem(), event.getPos(), event.getPlayer());
         }
     }
 
