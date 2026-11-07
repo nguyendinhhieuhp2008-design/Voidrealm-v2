@@ -17,6 +17,7 @@ TILE, CHI, SOIL, CRY = "voidrealm:void_tile", "voidrealm:void_chiseled", "voidre
 STAIR, SLAB = "voidrealm:void_bricks_stairs", "voidrealm:void_bricks_slab"
 FRAME, PORTAL, ALTAR, LANT = "voidrealm:void_portal_frame", "voidrealm:void_portal", "voidrealm:void_altar", "voidrealm:rift_lantern"
 PIL, STEEL, ORE = "voidrealm:void_pillar", "voidrealm:void_steel_block", "voidrealm:void_crystal_ore"
+DREAM = "voidrealm:dream_crystal_ore"
 GOLD, AME, GLASS, ROD = "minecraft:gold_block", "minecraft:amethyst_block", "minecraft:purple_stained_glass", "minecraft:end_rod"
 CHAIN, CRYOBS = "minecraft:chain", "minecraft:crying_obsidian"
 
@@ -384,7 +385,7 @@ def crystal_tree(t, x, y, z, rnd, h=None):
             soft(t, x + dx, y + h - 4, z + dz, LANT)
 
 
-def island_base(t, cx, cz, top_y, R, depth, seed, with_soil=True, ore_chance=0.02):
+def island_base(t, cx, cz, top_y, R, depth, seed, with_soil=True, ore_chance=0.02, dream_chance=0.5):
     rnd = random.Random(seed)
     surface = {}
     for x, z, d, ang in circle_cells(cx, cz, int(R * 1.3)):
@@ -403,8 +404,33 @@ def island_base(t, cx, cz, top_y, R, depth, seed, with_soil=True, ore_chance=0.0
             else:
                 b = ORE if rnd.random() < ore_chance else STN
             t.set(x, y, z, b)
-    # nhu thach
+    # mo Dream Crystal (hiem): cum 3-5 khoi o phan duoi / sườn dao
     cells = list(surface.keys())
+    if rnd.random() < dream_chance:
+        for _ in range(40):
+            x, z = rnd.choice(cells)
+            col = [y for (xx, y, zz) in t.blocks if xx == x and zz == z]
+            if len(col) < 6:
+                continue
+            y0 = min(col) + rnd.randint(0, 2)
+            if (x, y0, z) not in t.blocks:
+                continue
+            vein = {(x, y0, z)}
+            want = rnd.randint(3, 5)
+            for _ in range(60):
+                if len(vein) >= want:
+                    break
+                bx, by, bz = rnd.choice(sorted(vein))
+                dx, dy, dz = rnd.choice(((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)))
+                q = (bx + dx, by + dy, bz + dz)
+                if q in t.blocks and t.blocks[q][0] in (STN,):
+                    vein.add(q)
+            if len(vein) >= 3:
+                for q in vein:
+                    t.set(q[0], q[1], q[2], DREAM)
+                break
+    # nhu thach
+
     for _ in range(int(R * 1.2)):
         x, z = rnd.choice(cells)
         y = top_y
@@ -442,7 +468,7 @@ NEX_A = NEX_TOP + 1
 
 def nexus():
     t = T(*NEX_SIZE)
-    surface, rnd = island_base(t, NEX_C, NEX_C, NEX_TOP, 22, 20, 700, True, 0.03)
+    surface, rnd = island_base(t, NEX_C, NEX_C, NEX_TOP, 22, 20, 700, True, 0.03, 0.0)
     c = NEX_C
     for k in [k for k in t.blocks if k[1] > NEX_TOP and math.hypot(k[0] - c, k[2] - c) < 15.5]:
         del t.blocks[k]

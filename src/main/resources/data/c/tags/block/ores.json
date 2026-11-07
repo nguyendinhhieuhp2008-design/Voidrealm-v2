@@ -1,7 +1,8 @@
 {
   "values": [
     "voidrealm:void_crystal_ore",
-    "voidrealm:deepslate_void_crystal_ore"
+    "voidrealm:deepslate_void_crystal_ore",
+    "voidrealm:dream_crystal_ore"
   ],
   "replace": false
 }

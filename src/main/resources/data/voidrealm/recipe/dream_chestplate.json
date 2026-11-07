@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "D D",
+    "DSD",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "voidrealm:dream_crystal"
+    },
+    "S": {
+      "item": "voidrealm:phase_silk"
+    }
+  },
+  "result": {
+    "id": "voidrealm:dream_chestplate",
+    "count": 1
+  }
+}

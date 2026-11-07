@@ -66,3 +66,12 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 - Khối mới: Gạch Lát, Cột, Đá Khắc, Đất Hư Không, Khối Tinh Thể, Bậc/Phiến Gạch Hư Không, Khung Cổng, Bàn Tế. Toàn bộ texture khối vẽ lại (có hoạt ảnh).
 - 3 công trình cũ (Tháp Bia, Phế Tích, Pháo Đài) được xây lại đẹp hơn bằng khối mới.
 - Sinh lại dữ liệu: `gen_art → gen_data → gen_models → gen_armor → gen_magitech → gen_blocks → gen_realm`.
+
+## Dream Crystal (màu xanh dương)
+- **Quặng Dream Crystal** (`dream_crystal_ore`): chỉ có trong chiều Void Realm, rất hiếm, mọc thành cụm 3-5 khối ở phần dưới/sườn các đảo lơ lửng. Cần cuốc kim cương trở lên; hỗ trợ Fortune/Silk Touch. Rơi ra `dream_crystal`.
+- **Kiếm Mộng Tinh**: 13.5 sát thương, làm chậm mục tiêu 2 giây.
+- **Rìu Chiến Mộng Tinh**: 15 sát thương, bỏ qua giáp của mọi sinh vật.
+- **Nỏ Mộng Tinh**: nạp cực nhanh, mũi tên +5 sát thương và xuyên 2 mục tiêu (chế từ nỏ thường + Dream Crystal + Thép Hư Không).
+- **Bộ giáp Mộng Tinh** (khi mặc đủ 4 món): chestplate cho lướt như elytra (nhảy khi đang rơi); phím **C** = tăng tốc như pháo hoa (khi đang lướt); phím **K** = xúc tu xanh đánh kẻ địch trong 8 block (hồi chiêu 3 giây). Đổi phím ở Controls > Void Realm. Trên Zalith hãy gán nút điều khiển ảo cho C và K.
+- Cánh lướt dùng texture elytra mặc định.
+- Sinh lại dữ liệu: `... gen_blocks → gen_dream → gen_realm`.

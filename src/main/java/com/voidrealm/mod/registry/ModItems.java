@@ -1,6 +1,9 @@
 package com.voidrealm.mod.registry;
 
 import com.voidrealm.mod.VoidRealm;
+import com.voidrealm.mod.item.DreamChestplateItem;
+import com.voidrealm.mod.item.DreamCrossbowItem;
+import com.voidrealm.mod.item.DreamSwordItem;
 import com.voidrealm.mod.item.EyeOfTheVoidItem;
 import com.voidrealm.mod.item.GravityStaffItem;
 import com.voidrealm.mod.item.RiftBladeItem;
@@ -144,6 +147,28 @@ public class ModItems {
             armor("phase_cloth_leggings", ModArmorMaterials.PHASE_CLOTH, ArmorItem.Type.LEGGINGS, 22, false);
     public static final DeferredHolder<Item, Item> PHASE_CLOTH_BOOTS =
             armor("phase_cloth_boots", ModArmorMaterials.PHASE_CLOTH, ArmorItem.Type.BOOTS, 22, false);
+
+    // ---------------------------------------------------------------- Dream Crystal
+    public static final DeferredHolder<Item, Item> DREAM_CRYSTAL = ITEMS.register("dream_crystal",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredHolder<Item, Item> DREAM_SWORD = ITEMS.register("dream_sword",
+            () -> new DreamSwordItem(ModTiers.DREAM, new Item.Properties().rarity(Rarity.EPIC)
+                    .attributes(weaponAttributes(ModTiers.DREAM, 8.0F, -2.4F, 0.0D))));
+    public static final DeferredHolder<Item, Item> DREAM_BATTLE_AXE = ITEMS.register("dream_battle_axe",
+            () -> new AxeItem(ModTiers.DREAM, new Item.Properties().rarity(Rarity.EPIC)
+                    .attributes(weaponAttributes(ModTiers.DREAM, 9.5F, -3.2F, 0.0D))));
+    public static final DeferredHolder<Item, Item> DREAM_CROSSBOW = ITEMS.register("dream_crossbow",
+            () -> new DreamCrossbowItem(new Item.Properties().stacksTo(1).durability(1200).rarity(Rarity.EPIC)));
+    public static final DeferredHolder<Item, Item> DREAM_HELMET =
+            armor("dream_helmet", ModArmorMaterials.DREAM, ArmorItem.Type.HELMET, 38, false);
+    public static final DeferredHolder<Item, Item> DREAM_CHESTPLATE = ITEMS.register("dream_chestplate",
+            () -> new DreamChestplateItem(ModArmorMaterials.DREAM,
+                    new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(38)).rarity(Rarity.EPIC)));
+    public static final DeferredHolder<Item, Item> DREAM_LEGGINGS =
+            armor("dream_leggings", ModArmorMaterials.DREAM, ArmorItem.Type.LEGGINGS, 38, false);
+    public static final DeferredHolder<Item, Item> DREAM_BOOTS =
+            armor("dream_boots", ModArmorMaterials.DREAM, ArmorItem.Type.BOOTS, 38, false);
+    public static final DeferredHolder<Item, Item> DREAM_CRYSTAL_ORE_ITEM = blockItem("dream_crystal_ore", ModBlocks.DREAM_CRYSTAL_ORE);
 
     // ---------------------------------------------------------------- Khoi (item)
     public static final DeferredHolder<Item, Item> VOID_CRYSTAL_ORE_ITEM = blockItem("void_crystal_ore", ModBlocks.VOID_CRYSTAL_ORE);

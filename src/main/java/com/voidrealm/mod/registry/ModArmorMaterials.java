@@ -39,6 +39,17 @@ public class ModArmorMaterials {
                     1.0F,
                     0.0F));
 
+    /** Giap Mong Tinh: bao ve cao, nhe, co canh luot. Texture: dream_layer_*.png */
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> DREAM = ARMOR_MATERIALS.register("dream",
+            () -> new ArmorMaterial(
+                    defense(4, 9, 7, 4, 12),
+                    24,
+                    SoundEvents.ARMOR_EQUIP_ELYTRA,
+                    () -> Ingredient.of(ModItems.DREAM_CRYSTAL.get()),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(VoidRealm.MODID, "dream"))),
+                    3.0F,
+                    0.0F));
+
     private static Map<ArmorItem.Type, Integer> defense(int helmet, int chestplate, int leggings, int boots, int body) {
         Map<ArmorItem.Type, Integer> map = new EnumMap<>(ArmorItem.Type.class);
         map.put(ArmorItem.Type.HELMET, helmet);

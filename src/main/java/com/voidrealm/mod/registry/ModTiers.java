@@ -15,6 +15,15 @@ public class ModTiers {
             18,
             () -> Ingredient.of(ModItems.VOID_STEEL_INGOT.get()));
 
+    /** Mong Tinh (Dream Crystal): ben, sat thuong cao. */
+    public static final Tier DREAM = new SimpleTier(
+            BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
+            2800,
+            9.5F,
+            4.5F,
+            22,
+            () -> Ingredient.of(ModItems.DREAM_CRYSTAL.get()));
+
     private ModTiers() {
     }
 }

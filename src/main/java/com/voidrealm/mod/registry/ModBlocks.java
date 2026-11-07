@@ -39,6 +39,15 @@ public class ModBlocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.DEEPSLATE)));
 
+    public static final DeferredHolder<Block, Block> DREAM_CRYSTAL_ORE = BLOCKS.register("dream_crystal_ore",
+            () -> new VoidOreBlock(UniformInt.of(4, 8),
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BLUE)
+                            .strength(5.0F, 4.0F)
+                            .requiresCorrectToolForDrops()
+                            .lightLevel(state -> 6)
+                            .sound(SoundType.AMETHYST)));
+
     public static final DeferredHolder<Block, Block> VOID_STEEL_BLOCK = BLOCKS.register("void_steel_block",
             () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_PURPLE)

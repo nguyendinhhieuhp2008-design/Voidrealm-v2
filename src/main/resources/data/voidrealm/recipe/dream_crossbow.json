@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "IDI",
+    "SCS",
+    " D "
+  ],
+  "key": {
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    },
+    "D": {
+      "item": "voidrealm:dream_crystal"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minecraft:crossbow"
+    }
+  },
+  "result": {
+    "id": "voidrealm:dream_crossbow",
+    "count": 1
+  }
+}
