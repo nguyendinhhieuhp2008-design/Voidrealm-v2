@@ -290,7 +290,7 @@ def biome(name, sky, fog, water, particle, ambient, spawners_monster, spawners_c
     sp["creature"] = [{"type": V(e), "weight": w, "minCount": lo, "maxCount": hi} for (e, w, lo, hi) in spawners_creature]
     jw("data/voidrealm/worldgen/biome/%s.json" % name, {
         "temperature": 0.5, "downfall": 0.5, "has_precipitation": False, "effects": eff,
-        "carvers": [], "features": [[] for _ in range(11)], "spawners": sp, "spawn_costs": {}})
+        "carvers": {}, "features": [[] for _ in range(11)], "spawners": sp, "spawn_costs": {}})
 
 
 def worldgen():
