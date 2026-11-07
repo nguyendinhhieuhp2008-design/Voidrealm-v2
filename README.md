@@ -56,3 +56,13 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 - **Day Thung Trong Luc (Void Tether)**: chuot phai moc vao khoi, tu keo toi do; Shift tha; roi cham sau khi tha.
 - **Banh Chuoi Hu Khong (Void Fruit)**: an de co Levitation 3 giay + Slow Falling.
 - Thu tu sinh asset: gen_art -> gen_data -> gen_models -> gen_armor -> gen_magitech.
+
+## Void Realm - chiều không gian mới & Đền Tế (bản mới)
+- **Đền Tế Hư Không** (`voidrealm:void_sanctum`, hiếm, ở Overworld): 8 cột đá khổng lồ, đền thờ ở giữa với **Bàn Tế**, sau lưng đền là cổng 5x5 (khung `void_portal_frame`).
+  Tìm bằng `/locate structure voidrealm:void_sanctum`.
+- **Kích hoạt cổng**: ném **Trứng Rồng Ender** (Dragon Egg dạng vật phẩm) vào Bàn Tế. Nghi lễ diễn ra nhiều giai đoạn (sét thị giác, tia sáng từ 8 cột, khung cổng sáng dần), cuối cùng mặt cổng xuất hiện. Bước vào cổng để sang **Void Realm** (`voidrealm:void_realm`).
+- **Void Realm**: chiều kiểu End không có địa hình, chỉ có các **đảo lơ lửng** (tinh thể, đền đổ nát, cây tinh thể, tháp nhọn) và đảo trung tâm **Nexus** (có cổng về). 3 biome: Hư Không Mênh Mông, Vườn Tinh Thể, Vực Sao. Rơi khỏi đảo = chết (void).
+  Dùng lệnh: `/execute in voidrealm:void_realm run tp @s ~ 80 ~` (nếu cần).
+- Khối mới: Gạch Lát, Cột, Đá Khắc, Đất Hư Không, Khối Tinh Thể, Bậc/Phiến Gạch Hư Không, Khung Cổng, Bàn Tế. Toàn bộ texture khối vẽ lại (có hoạt ảnh).
+- 3 công trình cũ (Tháp Bia, Phế Tích, Pháo Đài) được xây lại đẹp hơn bằng khối mới.
+- Sinh lại dữ liệu: `gen_art → gen_data → gen_models → gen_armor → gen_magitech → gen_blocks → gen_realm`.

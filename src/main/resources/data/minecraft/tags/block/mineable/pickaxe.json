@@ -7,6 +7,14 @@
     "voidrealm:void_stone",
     "voidrealm:void_bricks",
     "voidrealm:rift_lantern",
-    "voidrealm:void_gateway"
+    "voidrealm:void_gateway",
+    "voidrealm:void_tile",
+    "voidrealm:void_pillar",
+    "voidrealm:void_chiseled",
+    "voidrealm:void_crystal_block",
+    "voidrealm:void_bricks_stairs",
+    "voidrealm:void_bricks_slab",
+    "voidrealm:void_portal_frame",
+    "voidrealm:void_altar"
   ]
 }

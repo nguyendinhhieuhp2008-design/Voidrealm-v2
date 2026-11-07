@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "voidrealm:void_bricks"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_tile",
+    "count": 4
+  }
+}

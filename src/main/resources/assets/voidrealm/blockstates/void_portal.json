@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "voidrealm:block/void_portal_x"
+    },
+    "axis=z": {
+      "model": "voidrealm:block/void_portal_z"
+    }
+  }
+}

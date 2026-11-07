@@ -65,5 +65,20 @@
   "message.voidrealm.gateway_fuel": "You need %s Void Shards in your inventory to teleport!",
   "message.voidrealm.gateway_jump": "Teleported to %s, %s, %s (-%s Void Shards)",
   "message.voidrealm.wisp_summoned": "Your Void Wisp follows you.",
-  "message.voidrealm.wisp_dismissed": "Your Void Wisp went home."
+  "message.voidrealm.wisp_dismissed": "Your Void Wisp went home.",
+  "block.voidrealm.void_tile": "Void Tile",
+  "block.voidrealm.void_pillar": "Void Pillar",
+  "block.voidrealm.void_chiseled": "Chiseled Void Stone",
+  "block.voidrealm.void_soil": "Void Soil",
+  "block.voidrealm.void_crystal_block": "Void Crystal Block",
+  "block.voidrealm.void_bricks_stairs": "Void Brick Stairs",
+  "block.voidrealm.void_bricks_slab": "Void Brick Slab",
+  "block.voidrealm.void_portal_frame": "Void Portal Frame",
+  "block.voidrealm.void_portal": "Void Portal",
+  "block.voidrealm.void_altar": "Void Altar",
+  "message.voidrealm.altar_hint": "The altar awaits a priceless offering... Throw a Dragon Egg onto it.",
+  "message.voidrealm.altar_busy": "The ritual is underway. Step back and watch.",
+  "biome.voidrealm.void_expanse": "Void Expanse",
+  "biome.voidrealm.crystal_gardens": "Crystal Gardens",
+  "biome.voidrealm.starlit_abyss": "Starlit Abyss"
 }

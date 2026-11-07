@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "ICI",
+    "C C",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    },
+    "C": {
+      "item": "voidrealm:void_chiseled"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_portal_frame",
+    "count": 4
+  }
+}

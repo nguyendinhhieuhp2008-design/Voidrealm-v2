@@ -152,6 +152,15 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> VOID_STONE_ITEM = blockItem("void_stone", ModBlocks.VOID_STONE);
     public static final DeferredHolder<Item, Item> VOID_BRICKS_ITEM = blockItem("void_bricks", ModBlocks.VOID_BRICKS);
     public static final DeferredHolder<Item, Item> RIFT_LANTERN_ITEM = blockItem("rift_lantern", ModBlocks.RIFT_LANTERN);
+    public static final DeferredHolder<Item, Item> VOID_TILE_ITEM = blockItem("void_tile", ModBlocks.VOID_TILE);
+    public static final DeferredHolder<Item, Item> VOID_PILLAR_ITEM = blockItem("void_pillar", ModBlocks.VOID_PILLAR);
+    public static final DeferredHolder<Item, Item> VOID_CHISELED_ITEM = blockItem("void_chiseled", ModBlocks.VOID_CHISELED);
+    public static final DeferredHolder<Item, Item> VOID_SOIL_ITEM = blockItem("void_soil", ModBlocks.VOID_SOIL);
+    public static final DeferredHolder<Item, Item> VOID_CRYSTAL_BLOCK_ITEM = blockItem("void_crystal_block", ModBlocks.VOID_CRYSTAL_BLOCK);
+    public static final DeferredHolder<Item, Item> VOID_BRICKS_STAIRS_ITEM = blockItem("void_bricks_stairs", ModBlocks.VOID_BRICKS_STAIRS);
+    public static final DeferredHolder<Item, Item> VOID_BRICKS_SLAB_ITEM = blockItem("void_bricks_slab", ModBlocks.VOID_BRICKS_SLAB);
+    public static final DeferredHolder<Item, Item> VOID_PORTAL_FRAME_ITEM = blockItem("void_portal_frame", ModBlocks.VOID_PORTAL_FRAME);
+    public static final DeferredHolder<Item, Item> VOID_ALTAR_ITEM = blockItem("void_altar", ModBlocks.VOID_ALTAR);
     public static final DeferredHolder<Item, Item> VOID_GATEWAY_ITEM = ITEMS.register("void_gateway",
             () -> new BlockItem(ModBlocks.VOID_GATEWAY.get(), new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredHolder<Item, Item> VOID_FLUX_ITEM = ITEMS.register("void_flux",

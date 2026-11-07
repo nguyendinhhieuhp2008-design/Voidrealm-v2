@@ -65,5 +65,20 @@
   "message.voidrealm.gateway_fuel": "Cần %s Mảnh Hư Không trong túi đồ để dịch chuyển!",
   "message.voidrealm.gateway_jump": "Dịch chuyển tới %s, %s, %s (-%s Mảnh Hư Không)",
   "message.voidrealm.wisp_summoned": "Void Wisp đã đi theo bạn.",
-  "message.voidrealm.wisp_dismissed": "Void Wisp đã trở về."
+  "message.voidrealm.wisp_dismissed": "Void Wisp đã trở về.",
+  "block.voidrealm.void_tile": "Gạch Lát Hư Không",
+  "block.voidrealm.void_pillar": "Cột Hư Không",
+  "block.voidrealm.void_chiseled": "Đá Khắc Hư Không",
+  "block.voidrealm.void_soil": "Đất Hư Không",
+  "block.voidrealm.void_crystal_block": "Khối Tinh Thể Hư Không",
+  "block.voidrealm.void_bricks_stairs": "Bậc Gạch Hư Không",
+  "block.voidrealm.void_bricks_slab": "Phiến Gạch Hư Không",
+  "block.voidrealm.void_portal_frame": "Khung Cổng Hư Không",
+  "block.voidrealm.void_portal": "Cổng Hư Không",
+  "block.voidrealm.void_altar": "Bàn Tế Hư Không",
+  "message.voidrealm.altar_hint": "Bàn tế đang chờ một vật phẩm vô giá... Hãy ném Trứng Rồng Ender vào đây.",
+  "message.voidrealm.altar_busy": "Nghi lễ đang diễn ra. Hãy lùi lại và chứng kiến.",
+  "biome.voidrealm.void_expanse": "Hư Không Mênh Mông",
+  "biome.voidrealm.crystal_gardens": "Vườn Tinh Thể",
+  "biome.voidrealm.starlit_abyss": "Vực Sao"
 }

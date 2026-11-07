@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "voidrealm:void_shard"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_crystal_block",
+    "count": 1
+  }
+}

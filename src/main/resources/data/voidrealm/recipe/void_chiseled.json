@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "voidrealm:void_bricks_slab"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_chiseled",
+    "count": 1
+  }
+}

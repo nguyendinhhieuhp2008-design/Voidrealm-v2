@@ -1,0 +1,16 @@
+{
+  "type": "voidrealm:void_realm",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "voidrealm:void_realm",
+    "biome_source": {
+      "type": "minecraft:checkerboard",
+      "scale": 5,
+      "biomes": [
+        "voidrealm:void_expanse",
+        "voidrealm:crystal_gardens",
+        "voidrealm:starlit_abyss"
+      ]
+    }
+  }
+}

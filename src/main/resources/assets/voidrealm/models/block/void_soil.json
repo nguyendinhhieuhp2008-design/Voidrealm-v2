@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "voidrealm:block/void_soil_top",
+    "side": "voidrealm:block/void_soil_side",
+    "bottom": "voidrealm:block/void_stone",
+    "particle": "voidrealm:block/void_soil_side"
+  }
+}

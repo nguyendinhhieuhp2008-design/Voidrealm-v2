@@ -339,6 +339,4 @@ def citadel():
 
 
 if __name__ == "__main__":
-    obelisk()
-    ruins()
-    citadel()
+    print("Cac cong trinh da chuyen sang tools/gen_realm.py")

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "B",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "voidrealm:void_bricks"
+    }
+  },
+  "result": {
+    "id": "voidrealm:void_pillar",
+    "count": 2
+  }
+}
