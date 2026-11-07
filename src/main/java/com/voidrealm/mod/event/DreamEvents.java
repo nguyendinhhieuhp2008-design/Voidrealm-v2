@@ -31,8 +31,7 @@ public class DreamEvents {
         }
         if (owner.getMainHandItem().is(ModItems.DREAM_CROSSBOW.get()) || owner.getOffhandItem().is(ModItems.DREAM_CROSSBOW.get())) {
             arrow.addTag("voidrealm_dream");
-            arrow.setBaseDamage(arrow.getBaseDamage() + 5.0D);
-            arrow.setPierceLevel((byte) 2);
+            arrow.setBaseDamage(arrow.getBaseDamage() + 7.0D);
             arrow.setGlowingTag(true);
         }
     }
