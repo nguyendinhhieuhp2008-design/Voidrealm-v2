@@ -88,3 +88,6 @@ Toàn bộ texture hiện là bản người dùng tự chỉnh (đã ghép vào
 - **Giữ chuột phải** (không shift) ~1.5 giây: tích lực rồi thả để bắn tia năng lượng phá hủy mọi khối trong vùng 3x3 dài 20 block theo hướng nhìn (hồi chiêu 5 giây, tốn độ bền).
 - Công thức: 5 Dream Crystal + Cuốc Thép Hư Không + Thỏi Thép Hư Không.
 - Mọi vũ khí và dụng cụ (kiếm, rìu, cuốc, xẻng, cuốc đất, lưỡi hái, giáo, trượng) nay dùng icon 2D phẳng; riêng Trượng Bóp Méo, Mắt Hư Không, Dây Thừng vẫn là model 3D.
+
+## Icon 32x32 (rift_blade, void_steel_sword, void_steel_pickaxe)
+Vẽ lại bằng `tools/gen_tools32.py` theo ảnh tham khảo của người chơi (chạy script này sau các script texture khác nếu cần sinh lại).
