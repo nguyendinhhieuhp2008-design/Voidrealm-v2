@@ -8,7 +8,21 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image  # noqa: E402
-from gen_art import hash2, vnoise, ramp  # noqa: E402
+from gen_art import hash2, ramp  # noqa: E402
+
+
+def vnoise(x, y, scale, seed):
+    """Value noise TUAN HOAN chu ky 16 -> moi texture ghep lien mach voi khoi canh ben."""
+    P = max(1, round(16 / scale))
+    gx, gy = (x % 16) * P / 16.0, (y % 16) * P / 16.0
+    x0, y0 = int(math.floor(gx)), int(math.floor(gy))
+    fx, fy = gx - x0, gy - y0
+    sx, sy = fx * fx * (3 - 2 * fx), fy * fy * (3 - 2 * fy)
+    a = hash2(x0 % P, y0 % P, seed)
+    b = hash2((x0 + 1) % P, y0 % P, seed)
+    c = hash2(x0 % P, (y0 + 1) % P, seed)
+    d = hash2((x0 + 1) % P, (y0 + 1) % P, seed)
+    return (a + (b - a) * sx) * (1 - sy) + (c + (d - c) * sx) * sy
 
 BLOCK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "main", "resources", "assets", "voidrealm", "textures", "block")
 

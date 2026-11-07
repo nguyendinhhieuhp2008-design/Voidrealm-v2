@@ -1,7 +1,21 @@
 {
   "variants": {
-    "": {
-      "model": "voidrealm:block/void_crystal_block"
-    }
+    "": [
+      {
+        "model": "voidrealm:block/void_crystal_block"
+      },
+      {
+        "model": "voidrealm:block/void_crystal_block",
+        "y": 90
+      },
+      {
+        "model": "voidrealm:block/void_crystal_block",
+        "y": 180
+      },
+      {
+        "model": "voidrealm:block/void_crystal_block",
+        "y": 270
+      }
+    ]
   }
 }

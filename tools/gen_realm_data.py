@@ -93,10 +93,15 @@ def stairs_state(name):
 
 def blocks():
     tex = lambda n: V("block/" + n)
+    # khoi tu nhien: xoay ngau nhien 4 huong de cac khoi canh nhau lien mach, khong lap hoa van
+    for n in ("void_stone", "void_crystal_block"):
+        jw("assets/voidrealm/blockstates/%s.json" % n, {"variants": {"": [
+            {"model": V("block/" + n), "y": r} if r else {"model": V("block/" + n)} for r in (0, 90, 180, 270)]}})
     for n in ("void_tile", "void_chiseled", "void_crystal_block"):
         jw("assets/voidrealm/models/block/%s.json" % n, {"parent": "minecraft:block/cube_all", "textures": {"all": tex(n)}})
-        jw("assets/voidrealm/blockstates/%s.json" % n, {"variants": {"": {"model": V("block/" + n)}}})
         jw("assets/voidrealm/models/item/%s.json" % n, {"parent": V("block/" + n)})
+    for n in ("void_tile", "void_chiseled"):
+        jw("assets/voidrealm/blockstates/%s.json" % n, {"variants": {"": {"model": V("block/" + n)}}})
     # tru
     jw("assets/voidrealm/models/block/void_pillar.json", {
         "parent": "minecraft:block/cube_column", "textures": {"end": tex("void_pillar_top"), "side": tex("void_pillar")}})

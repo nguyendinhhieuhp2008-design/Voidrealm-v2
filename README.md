@@ -75,3 +75,7 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 - **Bộ giáp Mộng Tinh** (khi mặc đủ 4 món): chestplate cho lướt như elytra (nhảy khi đang rơi); phím **C** = tăng tốc như pháo hoa (khi đang lướt); phím **K** = xúc tu xanh đánh kẻ địch trong 8 block (hồi chiêu 3 giây). Đổi phím ở Controls > Void Realm. Trên Zalith hãy gán nút điều khiển ảo cho C và K.
 - Cánh lướt dùng texture elytra mặc định.
 - Sinh lại dữ liệu: `... gen_blocks → gen_dream → gen_realm`.
+
+## Texture khối bản liền mạch
+- Mọi texture khối nền dùng nhiễu tuần hoàn (tileable) nên các khối cạnh nhau nối liền, không thấy đường ghép.
+- Đá Hư Không và Khối Tinh Thể xoay ngẫu nhiên 4 hướng (blockstate) để tránh lặp họa tiết.
