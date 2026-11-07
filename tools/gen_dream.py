@@ -52,7 +52,7 @@ def merge(path, update, tag=False):
 
 
 # ------------------------------------------------------------------ doi mau -> xanh duong
-def to_blue(img):
+def to_blue(img, lift=1.0):
     img = img.convert("RGBA")
     out = Image.new("RGBA", img.size)
     src, dst = img.load(), out.load()
@@ -73,14 +73,17 @@ def to_blue(img):
                 h = 0.60 + (((h - 0.75 + 0.5) % 1.0) - 0.5) * 0.35
                 s = min(1.0, s * 1.12 + 0.05)
                 v = min(1.0, v * 1.08)
+            if lift != 1.0 and v > 0.12:
+                v = min(1.0, v * lift + 0.05)
+                s = min(s, 0.85)
             rr, gg, bb = colorsys.hsv_to_rgb(h % 1.0, s, v)
             dst[x, y] = (int(rr * 255), int(gg * 255), int(bb * 255), a)
     return out
 
 
-def recolor(src, dst):
+def recolor(src, dst, lift=1.6):
     im = Image.open(os.path.join(TEX, src))
-    to_blue(im).save(os.path.join(TEX, dst))
+    to_blue(im, lift).save(os.path.join(TEX, dst))
 
 
 BLUE = [(8, 24, 80), (20, 60, 170), (50, 120, 240), (110, 190, 255), (220, 245, 255)]
@@ -107,6 +110,38 @@ def gem_icon():
     d.polygon([(1, 9), (3, 11), (1, 13), (0, 11)], fill=BLUE[2] + (255,), outline=outline)
     im.save(os.path.join(TEX, "item", "dream_crystal.png"))
     return im
+
+
+def drill_icon():
+    """Mui khoan Dream Crystal 2D: tay cam nau-xanh, than may xanh duong, mui khoan xoan oc o goc tren phai."""
+    S = 4
+    im = Image.new("RGBA", (16 * S, 16 * S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    dark, mid, lite, white = (6, 16, 56, 255), (30, 80, 200, 255), (110, 190, 255, 255), (235, 250, 255, 255)
+    wood, wood_l = (40, 36, 70, 255), (84, 78, 140, 255)
+
+    def L(p, q, col, w=1):
+        d.line([(p[0] * S + S // 2, p[1] * S + S // 2), (q[0] * S + S // 2, q[1] * S + S // 2)], fill=col, width=w * S)
+    L((1, 14), (7, 8), dark, 3)                    # tay cam
+    L((1, 14), (7, 8), wood, 2)
+    L((2, 13), (6, 9), wood_l, 1)
+    L((6, 9), (10, 5), dark, 6)                    # than may
+    L((6, 9), (10, 5), mid, 4)
+    L((6, 8), (9, 5), lite, 1)
+    d.rectangle([7 * S, 8 * S, 8 * S + S - 1, 9 * S + S - 1], fill=white)   # tinh the nang luong
+    # mui khoan (hinh non xoan oc)
+    d.polygon([(10 * S, 3 * S), (12 * S, 5 * S), (15 * S, 0), (15 * S + S - 1, 0)], fill=dark)
+    L((11, 4), (15, 0), lite, 2)
+    for k in range(3):
+        a = (11 + k, 4 - k)
+        L(a, (a[0] + 1, a[1] - 1), white, 1)
+    small = im.resize((16, 16), Image.NEAREST)
+    px = small.load()
+    for y in range(16):
+        for x in range(16):
+            r, g, b, a = px[x, y]
+            px[x, y] = (r, g, b, 255 if a > 100 else 0)
+    small.save(os.path.join(TEX, "item", "dream_drill.png"))
 
 
 def crossbow_icon():
@@ -192,8 +227,9 @@ def ore_texture():
 
 
 def make_textures():
-    for kind in ("sword", "axe"):
-        recolor("item/model/void_steel_%s.png" % kind, "item/model/dream_%s.png" % ("sword" if kind == "sword" else "battle_axe"))
+    recolor("item/void_steel_sword.png", "item/dream_sword.png")
+    recolor("item/void_steel_axe.png", "item/dream_battle_axe.png")
+    drill_icon()
     for piece in ("helmet", "chestplate", "leggings", "boots"):
         recolor("item/void_steel_%s.png" % piece, "item/dream_%s.png" % piece)
     for layer in (1, 2):
@@ -205,11 +241,10 @@ def make_textures():
 
 
 def models():
-    for src, dst in (("void_steel_sword", "dream_sword"), ("void_steel_axe", "dream_battle_axe")):
-        txt = open(os.path.join(A, "models", "item", src + ".json"), encoding="utf-8").read()
-        txt = txt.replace("item/model/" + src, "item/model/" + dst)
-        with open(os.path.join(A, "models", "item", dst + ".json"), "w", encoding="utf-8") as fp:
-            fp.write(txt)
+    flat = ["void_steel_sword", "void_steel_axe", "void_steel_pickaxe", "void_steel_shovel", "void_steel_hoe",
+            "rift_blade", "void_reaper", "voidpiercer", "gravity_staff", "dream_sword", "dream_battle_axe", "dream_drill"]
+    for n in flat:
+        jw("assets/voidrealm/models/item/%s.json" % n, {"parent": "minecraft:item/handheld", "textures": {"layer0": V("item/" + n)}})
     for n in ("dream_crystal", "dream_crossbow", "dream_helmet", "dream_chestplate", "dream_leggings", "dream_boots"):
         jw("assets/voidrealm/models/item/%s.json" % n, {"parent": "minecraft:item/generated", "textures": {"layer0": V("item/" + n)}})
     jw("assets/voidrealm/models/block/dream_crystal_ore.json", {"parent": "minecraft:block/cube_all", "textures": {"all": V("block/dream_crystal_ore")}})
@@ -228,6 +263,9 @@ def data():
         "item.voidrealm.dream_chestplate": "Giáp Cánh Mộng Tinh",
         "item.voidrealm.dream_leggings": "Quần Mộng Tinh",
         "item.voidrealm.dream_boots": "Giày Mộng Tinh",
+        "item.voidrealm.dream_drill": "Mũi Khoan Mộng Tinh",
+        "message.voidrealm.drill_on": "Mũi khoan: chế độ đào 3x3 BẬT",
+        "message.voidrealm.drill_off": "Mũi khoan: chế độ đào 3x3 TẮT",
         "key.categories.voidrealm": "Void Realm",
         "key.voidrealm.boost": "Giáp Mộng Tinh: tăng tốc khi bay",
         "key.voidrealm.tentacle": "Giáp Mộng Tinh: xúc tu tấn công",
@@ -245,6 +283,9 @@ def data():
         "item.voidrealm.dream_chestplate": "Dream Wing Chestplate",
         "item.voidrealm.dream_leggings": "Dream Leggings",
         "item.voidrealm.dream_boots": "Dream Boots",
+        "item.voidrealm.dream_drill": "Dream Crystal Drill",
+        "message.voidrealm.drill_on": "Drill: 3x3 mining mode ON",
+        "message.voidrealm.drill_off": "Drill: 3x3 mining mode OFF",
         "key.categories.voidrealm": "Void Realm",
         "key.voidrealm.boost": "Dream Armor: flight boost",
         "key.voidrealm.tentacle": "Dream Armor: tentacle strike",
@@ -264,6 +305,7 @@ def data():
     shaped("dream_battle_axe", ["DD", "DS", "IS"], {"D": D, "S": ST, "I": ING}, V("dream_battle_axe"))
     shaped("dream_crossbow", ["IDI", "SCS", " D "], {"I": ING, "D": D, "S": "minecraft:string", "C": "minecraft:crossbow"},
            V("dream_crossbow"))
+    shaped("dream_drill", ["DDD", "DPD", " I "], {"D": D, "P": V("void_steel_pickaxe"), "I": ING}, V("dream_drill"))
     shaped("dream_helmet", ["DDD", "D D"], {"D": D}, V("dream_helmet"))
     shaped("dream_chestplate", ["D D", "DSD", "DDD"], {"D": D, "S": SILK}, V("dream_chestplate"))
     shaped("dream_leggings", ["DDD", "D D", "D D"], {"D": D}, V("dream_leggings"))
@@ -283,13 +325,14 @@ def data():
     merge("data/minecraft/tags/block/needs_diamond_tool.json", [V("dream_crystal_ore")], True)
     merge("data/c/tags/block/ores.json", [V("dream_crystal_ore")], True)
     merge("data/minecraft/tags/item/swords.json", [V("dream_sword")], True)
+    merge("data/minecraft/tags/item/pickaxes.json", [V("dream_drill")], True)
     merge("data/minecraft/tags/item/axes.json", [V("dream_battle_axe")], True)
     merge("data/minecraft/tags/item/head_armor.json", [V("dream_helmet")], True)
     merge("data/minecraft/tags/item/chest_armor.json", [V("dream_chestplate")], True)
     merge("data/minecraft/tags/item/leg_armor.json", [V("dream_leggings")], True)
     merge("data/minecraft/tags/item/foot_armor.json", [V("dream_boots")], True)
     arm = [V("dream_helmet"), V("dream_chestplate"), V("dream_leggings"), V("dream_boots")]
-    allt = arm + [V("dream_sword"), V("dream_battle_axe"), V("dream_crossbow")]
+    allt = arm + [V("dream_sword"), V("dream_battle_axe"), V("dream_crossbow"), V("dream_drill")]
     merge("data/minecraft/tags/item/enchantable/armor.json", arm, True)
     merge("data/minecraft/tags/item/enchantable/head_armor.json", [arm[0]], True)
     merge("data/minecraft/tags/item/enchantable/chest_armor.json", [arm[1]], True)

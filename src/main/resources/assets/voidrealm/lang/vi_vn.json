@@ -95,5 +95,8 @@
   "message.voidrealm.altar_busy": "Nghi lễ đang diễn ra. Hãy lùi lại và chứng kiến.",
   "biome.voidrealm.void_expanse": "Hư Không Mênh Mông",
   "biome.voidrealm.crystal_gardens": "Vườn Tinh Thể",
-  "biome.voidrealm.starlit_abyss": "Vực Sao"
+  "biome.voidrealm.starlit_abyss": "Vực Sao",
+  "item.voidrealm.dream_drill": "Mũi Khoan Mộng Tinh",
+  "message.voidrealm.drill_on": "Mũi khoan: chế độ đào 3x3 BẬT",
+  "message.voidrealm.drill_off": "Mũi khoan: chế độ đào 3x3 TẮT"
 }

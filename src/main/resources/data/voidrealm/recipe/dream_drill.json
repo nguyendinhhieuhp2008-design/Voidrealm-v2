@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "DDD",
+    "DPD",
+    " I "
+  ],
+  "key": {
+    "D": {
+      "item": "voidrealm:dream_crystal"
+    },
+    "P": {
+      "item": "voidrealm:void_steel_pickaxe"
+    },
+    "I": {
+      "item": "voidrealm:void_steel_ingot"
+    }
+  },
+  "result": {
+    "id": "voidrealm:dream_drill",
+    "count": 1
+  }
+}

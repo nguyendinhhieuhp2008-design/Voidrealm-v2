@@ -82,3 +82,9 @@ Hoặc trên máy tính có JDK 21: `./gradlew build` → jar nằm ở `build/l
 
 ## Texture do người chơi tùy chỉnh
 Toàn bộ texture hiện là bản người dùng tự chỉnh (đã ghép vào repo). **Không chạy lại** `tools/gen_art.py`, `gen_armor.py`, `gen_blocks.py`, `gen_dream.py`... vì chúng sẽ ghi đè texture.
+
+## Mũi Khoan Mộng Tinh (`dream_drill`)
+- **Shift + chuột phải**: bật/tắt chế độ đào 3x3 (vuông góc với mặt đang đào).
+- **Giữ chuột phải** (không shift) ~1.5 giây: tích lực rồi thả để bắn tia năng lượng phá hủy mọi khối trong vùng 3x3 dài 20 block theo hướng nhìn (hồi chiêu 5 giây, tốn độ bền).
+- Công thức: 5 Dream Crystal + Cuốc Thép Hư Không + Thỏi Thép Hư Không.
+- Mọi vũ khí và dụng cụ (kiếm, rìu, cuốc, xẻng, cuốc đất, lưỡi hái, giáo, trượng) nay dùng icon 2D phẳng; riêng Trượng Bóp Méo, Mắt Hư Không, Dây Thừng vẫn là model 3D.

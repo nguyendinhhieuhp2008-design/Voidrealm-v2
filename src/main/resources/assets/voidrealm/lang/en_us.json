@@ -95,5 +95,8 @@
   "message.voidrealm.altar_busy": "The ritual is underway. Step back and watch.",
   "biome.voidrealm.void_expanse": "Void Expanse",
   "biome.voidrealm.crystal_gardens": "Crystal Gardens",
-  "biome.voidrealm.starlit_abyss": "Starlit Abyss"
+  "biome.voidrealm.starlit_abyss": "Starlit Abyss",
+  "item.voidrealm.dream_drill": "Dream Crystal Drill",
+  "message.voidrealm.drill_on": "Drill: 3x3 mining mode ON",
+  "message.voidrealm.drill_off": "Drill: 3x3 mining mode OFF"
 }

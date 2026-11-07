@@ -3,6 +3,7 @@ package com.voidrealm.mod.registry;
 import com.voidrealm.mod.VoidRealm;
 import com.voidrealm.mod.item.DreamChestplateItem;
 import com.voidrealm.mod.item.DreamCrossbowItem;
+import com.voidrealm.mod.item.DreamDrillItem;
 import com.voidrealm.mod.item.DreamSwordItem;
 import com.voidrealm.mod.item.EyeOfTheVoidItem;
 import com.voidrealm.mod.item.GravityStaffItem;
@@ -159,6 +160,9 @@ public class ModItems {
                     .attributes(weaponAttributes(ModTiers.DREAM, 9.5F, -3.2F, 0.0D))));
     public static final DeferredHolder<Item, Item> DREAM_CROSSBOW = ITEMS.register("dream_crossbow",
             () -> new DreamCrossbowItem(new Item.Properties().stacksTo(1).durability(1200).rarity(Rarity.EPIC)));
+    public static final DeferredHolder<Item, Item> DREAM_DRILL = ITEMS.register("dream_drill",
+            () -> new DreamDrillItem(ModTiers.DREAM, new Item.Properties().rarity(Rarity.EPIC)
+                    .attributes(PickaxeItem.createAttributes(ModTiers.DREAM, 1.0F, -2.8F))));
     public static final DeferredHolder<Item, Item> DREAM_HELMET =
             armor("dream_helmet", ModArmorMaterials.DREAM, ArmorItem.Type.HELMET, 38, false);
     public static final DeferredHolder<Item, Item> DREAM_CHESTPLATE = ITEMS.register("dream_chestplate",
