@@ -91,3 +91,7 @@ Toàn bộ texture hiện là bản người dùng tự chỉnh (đã ghép vào
 
 ## Icon 32x32 (rift_blade, void_steel_sword, void_steel_pickaxe)
 Vẽ lại bằng `tools/gen_tools32.py` theo ảnh tham khảo của người chơi (chạy script này sau các script texture khác nếu cần sinh lại).
+
+## Bộ Void Steel Tools (phong cách do người chơi cung cấp)
+- `void_steel_sword/shovel/pickaxe/hoe/axe`: cắt trực tiếp từ ảnh người chơi (32x32).
+- `void_reaper`, `voidpiercer`, `gravity_staff`, `dream_sword`, `dream_battle_axe`, `dream_drill`, `dream_crossbow`: vẽ mới theo phong cách đó bằng `tools/gen_tools_style.py` (đừng chạy `gen_dream.py` sau script này vì nó ghi đè icon Dream bản 16x16).
